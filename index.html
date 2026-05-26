@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeMaster - Aulas de Programação</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-code"></i>
+            <span>CodeMaster</span>
+        </div>
+        <nav>
+            <ul class="menu">
+                <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#linguagens"><i class="fas fa-laptop-code"></i> Linguagens</a></li>
+                <li><a href="#desafios"><i class="fas fa-trophy"></i> Desafios</a></li>
+                <li><a href="#ranking"><i class="fas fa-chart-bar"></i> Ranking</a></li>
+                <li><a href="#avaliacoes"><i class="fas fa-star"></i> Avaliações</a></li>
+                <li><a href="#" onclick="abrirModal('login')"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="#" onclick="abrirModal('cadastro')" class="btn-cadastrar"><i class="fas fa-user-plus"></i> Cadastrar</a></li>
+            </ul>
+            <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+
+        <!-- SEÇÃO HERO -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Aprenda a Programar <span class="destaque">do Zero ao Avançado</span></h1>
+                <p>Escolha sua linguagem, resolva desafios práticos e acompanhe sua evolução com nosso sistema de pontuação.</p>
+                <a href="#linguagens" class="btn-principal">Começar Agora <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="hero-img">
+                <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop" alt="Programação">
+            </div>
+        </section>
+
+        <!-- SEÇÃO LINGUAGENS -->
+        <section id="linguagens" class="linguagens">
+            <h2><i class="fas fa-code-branch"></i> Escolha sua Linguagem</h2>
+            <p class="subtitulo">Selecione uma linguagem para começar os desafios</p>
+            
+            <div class="cards-linguagens">
+                <div class="card-lang" data-lang="javascript" onclick="selecionarLinguagem('javascript', this)">
+                    <i class="fab fa-js-square" style="color:#f7df1e;"></i>
+                    <h3>JavaScript</h3>
+                    <p>Desenvolvimento web e aplicações interativas</p>
+                    <span class="nivel">Iniciante ao Avançado</span>
+                </div>
+                <div class="card-lang" data-lang="python" onclick="selecionarLinguagem('python', this)">
+                    <i class="fab fa-python" style="color:#3776ab;"></i>
+                    <h3>Python</h3>
+                    <p>Automação, data science e inteligência artificial</p>
+                    <span class="nivel">Iniciante ao Avançado</span>
+                </div>
+                <div class="card-lang" data-lang="htmlcss" onclick="selecionarLinguagem('htmlcss', this)">
+                    <i class="fab fa-html5" style="color:#e34f26;"></i>
+                    <h3>HTML & CSS</h3>
+                    <p>Estruturação e estilização de páginas web</p>
+                    <span class="nivel">Iniciante</span>
+                </div>
+                <div class="card-lang" data-lang="java" onclick="selecionarLinguagem('java', this)">
+                    <i class="fab fa-java" style="color:#007396;"></i>
+                    <h3>Java</h3>
+                    <p>Aplicações empresariais e mobile (Android)</p>
+                    <span class="nivel">Intermediário ao Avançado</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DESAFIOS -->
+        <section id="desafios" class="desafios">
+            <div class="desafios-header">
+                <h2><i class="fas fa-trophy"></i> Desafios de Programação</h2>
+                <div id="lang-selecionada" class="lang-badge">Selecione uma linguagem acima</div>
+            </div>
+
+            <div class="filtros">
+                <button class="filtro-btn active" onclick="filtrarDificuldade('todos')">Todos</button>
+                <button class="filtro-btn" onclick="filtrarDificuldade('facil')">Fácil</button>
+                <button class="filtro-btn" onclick="filtrarDificuldade('medio')">Médio</button>
+                <button class="filtro-btn" onclick="filtrarDificuldade('dificil')">Difícil</button>
+            </div>
+
+            <div id="lista-desafios" class="lista-desafios">
+                <div class="msg-selecao">
+                    <i class="fas fa-hand-pointer"></i>
+                    <p>Escolha uma linguagem para ver os desafios disponíveis</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO RANKING / ACERTOS -->
+        <section id="ranking" class="ranking">
+            <h2><i class="fas fa-chart-line"></i> Seu Desempenho</h2>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h3 id="total-acertos">0</h3>
+                    <p>Acertos Totais</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-fire"></i>
+                    <h3 id="sequencia">0</h3>
+                    <p>Sequência de Acertos</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-star"></i>
+                    <h3 id="pontuacao">0</h3>
+                    <p>Pontuação Total</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-layer-group"></i>
+                    <h3 id="nivel-atual">Iniciante</h3>
+                    <p>Nível Atual</p>
+                </div>
+            </div>
+
+            <div class="tabela-ranking">
+                <h3><i class="fas fa-list-ol"></i> Histórico de Desafios</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Linguagem</th>
+                                <th>Desafio</th>
+                                <th>Dificuldade</th>
+                                <th>Resultado</th>
+                                <th>Pontos</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historico-tbody">
+                            <tr class="vazio">
+                                <td colspan="6"><i class="fas fa-inbox"></i> Nenhum desafio resolvido ainda. Comece agora!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO AVALIAÇÕES -->
+        <section id="avaliacoes" class="avaliacoes">
+            <h2><i class="fas fa-comments"></i> O que Nossos Alunos Dizem</h2>
+            
+            <div class="cards-avaliacoes">
+                <div class="card-avaliacao">
+                    <div class="estrelas">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"A plataforma é incrível! Aprendi JavaScript em 2 semanas com os desafios práticos. Recomendo demais!"</p>
+                    <div class="autor">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="Ana Silva">
+                        <div>
+                            <strong>Ana Silva</strong>
+                            <span>Desenvolvedora Front-end</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-avaliacao">
+                    <div class="estrelas">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>"Os desafios de Python me ajudaram a conseguir meu primeiro emprego na área de dados. Muito obrigado, CodeMaster!"</p>
+                    <div class="autor">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Carlos Mendes">
+                        <div>
+                            <strong>Carlos Mendes</strong>
+                            <span>Analista de Dados</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-avaliacao">
+                    <div class="estrelas">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"A didática é excelente e o sistema de pontuação me motiva a estudar todos os dias. Melhor investimento que fiz!"</p>
+                    <div class="autor">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Mariana Costa">
+                        <div>
+                            <strong>Mariana Costa</strong>
+                            <span>Estudante de Ciência da Computação</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-avaliacao">
+                    <div class="estrelas">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"Comecei do zero em HTML/CSS e hoje já construo sites completos. A plataforma é intuitiva e os desafios são desafiadores."</p>
+                    <div class="autor">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Pedro Oliveira">
+                        <div>
+                            <strong>Pedro Oliveira</strong>
+                            <span>Freelancer Web</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="galeria">
+                <h3><i class="fas fa-images"></i> Nossa Comunidade em Ação</h3>
+                <div class="galeria-grid">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop" alt="Programação">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop" alt="Equipe">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=300&fit=crop" alt="Código">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=300&fit=crop" alt="Escritório">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <div class="logo">
+                    <i class="fas fa-code"></i>
+                    <span>CodeMaster</span>
+                </div>
+                <p>Transformando iniciantes em desenvolvedores profissionais através de desafios práticos e gamificação.</p>
+                <div class="social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#linguagens">Linguagens</a></li>
+                    <li><a href="#desafios">Desafios</a></li>
+                    <li><a href="#ranking">Ranking</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Linguagens</h4>
+                <ul>
+                    <li><a href="#linguagens" onclick="selecionarLinguagem('javascript')">JavaScript</a></li>
+                    <li><a href="#linguagens" onclick="selecionarLinguagem('python')">Python</a></li>
+                    <li><a href="#linguagens" onclick="selecionarLinguagem('htmlcss')">HTML & CSS</a></li>
+                    <li><a href="#linguagens" onclick="selecionarLinguagem('java')">Java</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> contato@codemaster.com</li>
+                    <li><i class="fas fa-phone"></i> (11) 99999-9999</li>
+                    <li><i class="fas fa-map-marker-alt"></i> São Paulo, SP</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CodeMaster. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL LOGIN -->
+    <div id="modal-login" class="modal">
+        <div class="modal-content">
+            <span class="fechar" onclick="fecharModal('login')">&times;</span>
+            <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
+            <form onsubmit="event.preventDefault(); fazerLogin();">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="E-mail" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Senha" required>
+                </div>
+                <button type="submit" class="btn-modal">Entrar</button>
+                <p class="modal-link">Não tem conta? <a href="#" onclick="fecharModal('login'); abrirModal('cadastro')">Cadastre-se</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL CADASTRO -->
+    <div id="modal-cadastro" class="modal">
+        <div class="modal-content">
+            <span class="fechar" onclick="fecharModal('cadastro')">&times;</span>
+            <h2><i class="fas fa-user-plus"></i> Cadastrar</h2>
+            <form onsubmit="event.preventDefault(); fazerCadastro();">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Nome Completo" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="E-mail" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Senha" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Confirmar Senha" required>
+                </div>
+                <button type="submit" class="btn-modal">Criar Conta</button>
+                <p class="modal-link">Já tem conta? <a href="#" onclick="fecharModal('cadastro'); abrirModal('login')">Faça login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DESAFIO -->
+    <div id="modal-desafio" class="modal">
+        <div class="modal-content modal-grande">
+            <span class="fechar" onclick="fecharModal('desafio')">&times;</span>
+            <div id="conteudo-desafio"></div>
+        </div>
+    </div>
+
+    <!-- NOTIFICAÇÃO -->
+    <div id="notificacao" class="notificacao"></div>
+
+    <script>
+        // ========== DADOS DOS DESAFIOS - 10 QUESTÕES POR LINGUAGEM ==========
+        const desafiosData = {
+            javascript: [
+                { id: 1, titulo: "Hello World", dificuldade: "facil", descricao: "Qual é a forma correta de retornar 'Hello, World!' em uma função JavaScript?", opcoes: ["return 'Hello World'", "console.log('Hello World')", "alert('Hello World')", "document.write('Hello World')"], correta: 0, pontos: 10 },
+                { id: 2, titulo: "Soma de Dois Números", dificuldade: "facil", descricao: "Qual é a sintaxe correta para criar uma função que some dois números e retorne o resultado?", opcoes: ["a + b", "return a + b", "function soma(a,b){ return a+b }", "soma = a + b"], correta: 2, pontos: 10 },
+                { id: 3, titulo: "Tipo de Dado", dificuldade: "facil", descricao: "Qual operador verifica o tipo de uma variável em JavaScript?", opcoes: ["typeof", "type", "instanceof", "getType"], correta: 0, pontos: 10 },
+                { id: 4, titulo: "Array Length", dificuldade: "facil", descricao: "Como obter o número de elementos de um array chamado 'arr'?", opcoes: ["arr.size", "arr.length", "arr.count", "arr.elements"], correta: 1, pontos: 10 },
+                { id: 5, titulo: "Template String", dificuldade: "facil", descricao: "Qual símbolo é usado para criar template strings (template literals) em JavaScript?", opcoes: ["' '", '" "', "` `", "( )"], correta: 2, pontos: 10 },
+                { id: 6, titulo: "Fatorial", dificuldade: "medio", descricao: "Qual é a implementação correta de uma função recursiva para calcular fatorial?", opcoes: ["n * (n-1)", "function fat(n){ return n<=1?1:n*fat(n-1) }", "Math.factorial(n)", "for(i=0;i<n;i++)"], correta: 1, pontos: 20 },
+                { id: 7, titulo: "Palíndromo", dificuldade: "medio", descricao: "Qual código verifica corretamente se uma string é um palíndromo?", opcoes: ["str === str.reverse()", "str.split('').reverse().join('') === str", "str == str[::-1]", "str.palindrome()"], correta: 1, pontos: 20 },
+                { id: 8, titulo: "Map vs ForEach", dificuldade: "medio", descricao: "Qual a diferença principal entre map() e forEach() em arrays?", opcoes: ["Nenhuma diferença", "map retorna um novo array, forEach não", "forEach é mais rápido", "map só funciona com números"], correta: 1, pontos: 20 },
+                { id: 9, titulo: "Promises", dificuldade: "dificil", descricao: "Qual é a forma correta de criar uma Promise em JavaScript?", opcoes: ["new Promise((resolve, reject) => {})", "Promise.create()", "async Promise()", "Promise.new()"], correta: 0, pontos: 30 },
+                { id: 10, titulo: "Closure", dificuldade: "dificil", descricao: "O que é uma closure em JavaScript?", opcoes: ["Uma função anônima", "Uma função que lembra seu escopo léxico", "Um loop infinito", "Um tipo de variável"], correta: 1, pontos: 30 }
+            ],
+            python: [
+                { id: 1, titulo: "Print Básico", dificuldade: "facil", descricao: "Qual é a forma correta de imprimir 'Hello World' em Python?", opcoes: ["echo 'Hello World'", "print('Hello World')", "console.log('Hello World')", "printf('Hello World')"], correta: 1, pontos: 10 },
+                { id: 2, titulo: "Lista Comprehension", dificuldade: "facil", descricao: "Qual código cria uma lista de quadrados de 1 a 5 usando list comprehension?", opcoes: ["[x**2 for x in range(1,6)]", "list(map(lambda x: x**2, [1,2,3,4,5]))", "for x in range(1,6): print(x**2)", "x**2 for x in [1,2,3,4,5]"], correta: 0, pontos: 10 },
+                { id: 3, titulo: "Indentação", dificuldade: "facil", descricao: "Python usa qual mecanismo para definir blocos de código?", opcoes: ["Chaves { }", "Parênteses ( )", "Indentação (espaços)", "Palavras-chave begin/end"], correta: 2, pontos: 10 },
+                { id: 4, titulo: "Tipo de Dados", dificuldade: "facil", descricao: "Qual função retorna o tipo de uma variável em Python?", opcoes: ["type()", "typeof()", "getType()", "class()"], correta: 0, pontos: 10 },
+                { id: 5, titulo: "Slice de Lista", dificuldade: "facil", descricao: "Como obter os últimos 3 elementos de uma lista 'nums' em Python?", opcoes: ["nums[-3:]", "nums.last(3)", "nums.slice(-3)", "nums[3:]"], correta: 0, pontos: 10 },
+                { id: 6, titulo: "Dicionários", dificuldade: "medio", descricao: "Qual é a forma correta de acessar um valor em um dicionário Python?", opcoes: ["dict.key", "dict['key']", "dict.get(key)", "dict->key"], correta: 1, pontos: 20 },
+                { id: 7, titulo: "Função Lambda", dificuldade: "medio", descricao: "Qual é a sintaxe correta de uma função lambda que soma dois números?", opcoes: ["lambda x, y: x + y", "def lambda(x,y): return x+y", "function(x,y) => x+y", "lambda(x,y){ return x+y }"], correta: 0, pontos: 20 },
+                { id: 8, titulo: "Try/Except", dificuldade: "medio", descricao: "Qual bloco é executado quando NENHUMA exceção ocorre em try/except?", opcoes: ["except", "finally", "else", "catch"], correta: 2, pontos: 20 },
+                { id: 9, titulo: "Decorators", dificuldade: "dificil", descricao: "Qual é a sintaxe correta para aplicar um decorator em Python?", opcoes: ["@decorator", "#decorator", "decorator()", "*decorator"], correta: 0, pontos: 30 },
+                { id: 10, titulo: "Generators", dificuldade: "dificil", descricao: "Como definir uma generator function em Python?", opcoes: ["function* gen()", "def gen(): yield", "generator gen()", "async def gen()"], correta: 1, pontos: 30 }
+            ],
+            htmlcss: [
+                { id: 1, titulo: "Estrutura HTML", dificuldade: "facil", descricao: "Qual tag define o título da página que aparece na aba do navegador?", opcoes: ["<header>", "<title>", "<h1>", "<head>"], correta: 1, pontos: 10 },
+                { id: 2, titulo: "CSS Flexbox", dificuldade: "facil", descricao: "Qual propriedade CSS centraliza itens verticalmente em um container flex?", opcoes: ["align-items: center", "text-align: center", "margin: auto", "float: center"], correta: 0, pontos: 10 },
+                { id: 3, titulo: "Tag de Imagem", dificuldade: "facil", descricao: "Qual é a tag correta para inserir uma imagem em HTML?", opcoes: ["<image>", "<img>", "<pic>", "<photo>"], correta: 1, pontos: 10 },
+                { id: 4, titulo: "ID vs Class", dificuldade: "facil", descricao: "Qual seletor CSS é usado para um elemento único na página?", opcoes: [".", "#", "*", ":"], correta: 1, pontos: 10 },
+                { id: 5, titulo: "Box Model", dificuldade: "facil", descricao: "Qual propriedade define o espaço INTERNO entre o conteúdo e a borda?", opcoes: ["margin", "padding", "border", "outline"], correta: 1, pontos: 10 },
+                { id: 6, titulo: "Media Queries", dificuldade: "medio", descricao: "Qual é a sintaxe correta para um breakpoint mobile em CSS?", opcoes: ["@media (max-width: 768px)", "@screen mobile", "@breakpoint 768px", "@responsive 768px"], correta: 0, pontos: 20 },
+                { id: 7, titulo: "Grid Layout", dificuldade: "medio", descricao: "Como criar 3 colunas de tamanhos iguais com CSS Grid?", opcoes: ["grid-template-columns: 1fr 1fr 1fr", "columns: 3", "display: grid-3", "grid: 3 columns"], correta: 0, pontos: 20 },
+                { id: 8, titulo: "Position Absolute", dificuldade: "medio", descricao: "Em relação a qual elemento um 'position: absolute' é posicionado?", opcoes: ["Ao viewport", "Ao primeiro ancestral posicionado", "Ao body", "Ao documento"], correta: 1, pontos: 20 },
+                { id: 9, titulo: "Pseudo-classes", dificuldade: "dificil", descricao: "Qual pseudo-classe aplica estilo ao primeiro filho de um elemento?", opcoes: [":first", ":first-child", ":nth-child(1)", "Ambas B e C"], correta: 3, pontos: 30 },
+                { id: 10, titulo: "CSS Variables", dificuldade: "dificil", descricao: "Qual é a sintaxe correta para definir uma variável CSS?", opcoes: ["var --cor: red", "--cor: red", "$cor: red", "@cor: red"], correta: 1, pontos: 30 }
+            ],
+            java: [
+                { id: 1, titulo: "Main Method", dificuldade: "facil", descricao: "Qual é a assinatura correta do método main em Java?", opcoes: ["public static void main(String[] args)", "void main()", "static main(String args)", "public void main()"], correta: 0, pontos: 10 },
+                { id: 2, titulo: "Tipos Primitivos", dificuldade: "facil", descricao: "Qual tipo primitivo em Java armazena valores verdadeiros/falsos?", opcoes: ["Boolean", "boolean", "bool", "Bit"], correta: 1, pontos: 10 },
+                { id: 3, titulo: "Herança", dificuldade: "facil", descricao: "Qual palavra-chave indica que uma classe herda de outra em Java?", opcoes: ["extends", "implements", "inherits", "super"], correta: 0, pontos: 10 },
+                { id: 4, titulo: "Construtor", dificuldade: "facil", descricao: "Qual regra define um construtor em Java?", opcoes: ["Deve ter return", "Deve ter o mesmo nome da classe", "Deve ser static", "Deve ser void"], correta: 1, pontos: 10 },
+                { id: 5, titulo: "Array Declaration", dificuldade: "facil", descricao: "Qual é a forma correta de declarar um array de inteiros em Java?", opcoes: ["int[] nums = new int[5]", "int nums[5]", "array int nums[5]", "int nums = [5]"], correta: 0, pontos: 10 },
+                { id: 6, titulo: "Interfaces", dificuldade: "medio", descricao: "Qual palavra-chave é usada para implementar uma interface em Java?", opcoes: ["implements", "extends", "interface", "import"], correta: 0, pontos: 20 },
+                { id: 7, titulo: "Exceções", dificuldade: "medio", descricao: "Qual classe é a superclasse de TODAS as exceções em Java?", opcoes: ["Error", "Exception", "Throwable", "RuntimeException"], correta: 2, pontos: 20 },
+                { id: 8, titulo: "Polimorfismo", dificuldade: "medio", descricao: "Qual conceito permite que um método tenha comportamentos diferentes em classes diferentes?", opcoes: ["Encapsulamento", "Herança", "Polimorfismo", "Abstração"], correta: 2, pontos: 20 },
+                { id: 9, titulo: "Threads", dificuldade: "dificil", descricao: "Qual das opções NÃO é uma forma válida de criar uma thread em Java?", opcoes: ["extends Thread", "implements Runnable", "implements Callable", "new Thread() sem parâmetros"], correta: 3, pontos: 30 },
+                { id: 10, titulo: "Garbage Collector", dificuldade: "dificil", descricao: "Qual método SUGERE ao Garbage Collector que execute a coleta de lixo?", opcoes: ["System.gc()", "Runtime.gc()", "Object.finalize()", "Ambas A e B"], correta: 3, pontos: 30 }
+            ]
+        };
+
+        // ========== ESTADO ==========
+        let linguagemAtual = null;
+        let filtroDificuldade = 'todos';
+        let acertos = 0;
+        let sequencia = 0;
+        let pontuacao = 0;
+        let historico = [];
+        let desafiosResolvidos = new Set();
+
+        // ========== FUNÇÕES DO MENU ==========
+        function toggleMenu() {
+            document.querySelector('.menu').classList.toggle('active');
+        }
+
+        // ========== MODAIS ==========
+        function abrirModal(tipo) {
+            document.getElementById(`modal-${tipo}`).style.display = 'flex';
+        }
+
+        function fecharModal(tipo) {
+            document.getElementById(`modal-${tipo}`).style.display = 'none';
+        }
+
+        function fazerLogin() {
+            mostrarNotificacao('Login realizado com sucesso! Bem-vindo de volta.', 'sucesso');
+            fecharModal('login');
+        }
+
+        function fazerCadastro() {
+            mostrarNotificacao('Cadastro realizado! Sua conta foi criada.', 'sucesso');
+            fecharModal('cadastro');
+        }
+
+        // ========== NOTIFICAÇÃO ==========
+        function mostrarNotificacao(msg, tipo) {
+            const notif = document.getElementById('notificacao');
+            notif.textContent = msg;
+            notif.className = `notificacao ${tipo} show`;
+            setTimeout(() => notif.classList.remove('show'), 3000);
+        }
+
+        // ========== SELEÇÃO DE LINGUAGEM ==========
+        function selecionarLinguagem(lang, element) {
+            linguagemAtual = lang;
+            const nomes = { javascript: 'JavaScript', python: 'Python', htmlcss: 'HTML & CSS', java: 'Java' };
+            document.getElementById('lang-selecionada').textContent = `Linguagem: ${nomes[lang]}`;
+            document.getElementById('lang-selecionada').classList.add('ativo');
+            
+            // Destacar card selecionado
+            document.querySelectorAll('.card-lang').forEach(c => c.classList.remove('selecionado'));
+            
+            // Se element foi passado (clique no card), usa ele. Senão, busca pelo data-lang
+            if (element) {
+                element.classList.add('selecionado');
+            } else {
+                const card = document.querySelector(`.card-lang[data-lang="${lang}"]`);
+                if (card) card.classList.add('selecionado');
+            }
+            
+            renderizarDesafios();
+            mostrarNotificacao(`${nomes[lang]} selecionado! ${desafiosData[lang].length} desafios carregados.`, 'sucesso');
+            
+            // Scroll para desafios
+            document.getElementById('desafios').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ========== FILTRO DE DIFICULDADE ==========
+        function filtrarDificuldade(dif) {
+            filtroDificuldade = dif;
+            document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            if (linguagemAtual) renderizarDesafios();
+        }
+
+        function getDificuldadeLabel(dif) {
+            const labels = { facil: 'Fácil', medio: 'Médio', dificil: 'Difícil' };
+            const cores = { facil: 'verde', medio: 'amarelo', dificil: 'vermelho' };
+            return { texto: labels[dif], classe: cores[dif] };
+        }
+
+        // ========== RENDERIZAR DESAFIOS ==========
+        function renderizarDesafios() {
+            const container = document.getElementById('lista-desafios');
+            
+            if (!linguagemAtual) {
+                container.innerHTML = `
+                    <div class="msg-selecao">
+                        <i class="fas fa-hand-pointer"></i>
+                        <p>Escolha uma linguagem para ver os desafios disponíveis</p>
+                    </div>`;
+                return;
+            }
+
+            let desafios = desafiosData[linguagemAtual] || [];
+            if (filtroDificuldade !== 'todos') {
+                desafios = desafios.filter(d => d.dificuldade === filtroDificuldade);
+            }
+
+            if (desafios.length === 0) {
+                container.innerHTML = `<div class="msg-selecao"><i class="fas fa-inbox"></i><p>Nenhum desafio nesta dificuldade.</p></div>`;
+                return;
+            }
+
+            container.innerHTML = desafios.map(d => {
+                const dif = getDificuldadeLabel(d.dificuldade);
+                const resolvido = desafiosResolvidos.has(`${linguagemAtual}-${d.id}`);
+                return `
+                    <div class="card-desafio ${resolvido ? 'resolvido' : ''}">
+                        <div class="desafio-header">
+                            <h4><span class="num-desafio">#${d.id}</span> ${d.titulo}</h4>
+                            <span class="badge-dificuldade ${dif.classe}">${dif.texto}</span>
+                        </div>
+                        <p>${d.descricao}</p>
+                        <div class="desafio-footer">
+                            <span class="pontos"><i class="fas fa-star"></i> ${d.pontos} pts</span>
+                            ${resolvido ? '<span class="badge-resolvido"><i class="fas fa-check"></i> Resolvido</span>' : ''}
+                            <button onclick="abrirDesafio('${linguagemAtual}', ${d.id})" class="btn-desafio">
+                                ${resolvido ? 'Refazer' : 'Resolver'} <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ========== ABRIR DESAFIO ==========
+        function abrirDesafio(lang, id) {
+            const desafio = desafiosData[lang].find(d => d.id === id);
+            const dif = getDificuldadeLabel(desafio.dificuldade);
+            
+            const html = `
+                <h3><i class="fas fa-code"></i> #${desafio.id} - ${desafio.titulo}</h3>
+                <div class="desafio-info">
+                    <span class="badge-dificuldade ${dif.classe}">${dif.texto}</span>
+                    <span class="pontos"><i class="fas fa-star"></i> ${desafio.pontos} pontos</span>
+                </div>
+                <div class="desafio-enunciado">
+                    <p><strong>Enunciado:</strong> ${desafio.descricao}</p>
+                </div>
+                <div class="opcoes-resposta">
+                    ${desafio.opcoes.map((op, i) => `
+                        <button class="opcao-btn" onclick="responder(${i}, ${desafio.correta}, ${desafio.pontos}, '${lang}', ${desafio.id}, '${desafio.titulo.replace(/'/g, "\\'")}', '${desafio.dificuldade}')">
+                            <span class="letra">${String.fromCharCode(65 + i)}</span>
+                            <span class="texto">${op}</span>
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+            
+            document.getElementById('conteudo-desafio').innerHTML = html;
+            abrirModal('desafio');
+        }
+
+        // ========== RESPONDER DESAFIO ==========
+        function responder(selecionado, correta, pontos, lang, id, titulo, dificuldade) {
+            const botoes = document.querySelectorAll('.opcao-btn');
+            const acertou = selecionado === correta;
+            
+            botoes.forEach((btn, i) => {
+                btn.disabled = true;
+                if (i === correta) btn.classList.add('correta');
+                if (i === selecionado && !acertou) btn.classList.add('errada');
+            });
+
+            const chave = `${lang}-${id}`;
+            
+            if (acertou) {
+                if (!desafiosResolvidos.has(chave)) {
+                    acertos++;
+                    pontuacao += pontos;
+                    desafiosResolvidos.add(chave);
+                }
+                sequencia++;
+                mostrarNotificacao(`🎉 Parabéns! Você acertou e ganhou ${pontos} pontos!`, 'sucesso');
+            } else {
+                sequencia = 0;
+                mostrarNotificacao('❌ Resposta incorreta. Tente novamente!', 'erro');
+            }
+
+            // Atualizar stats
+            document.getElementById('total-acertos').textContent = acertos;
+            document.getElementById('sequencia').textContent = sequencia;
+            document.getElementById('pontuacao').textContent = pontuacao;
+            
+            // Atualizar nível
+            let nivel = 'Iniciante';
+            if (pontuacao >= 100) nivel = 'Intermediário';
+            if (pontuacao >= 200) nivel = 'Avançado';
+            if (pontuacao >= 350) nivel = 'Expert';
+            document.getElementById('nivel-atual').textContent = nivel;
+
+            // Adicionar ao histórico
+            historico.unshift({
+                lang: lang.toUpperCase(),
+                titulo: titulo,
+                dificuldade: getDificuldadeLabel(dificuldade).texto,
+                resultado: acertou ? '✅ Acerto' : '❌ Erro',
+                pontos: acertou ? `+${pontos}` : '0',
+                classe: acertou ? 'acerto' : 'erro'
+            });
+            atualizarHistorico();
+
+            setTimeout(() => {
+                fecharModal('desafio');
+                renderizarDesafios();
+            }, 2000);
+        }
+
+        // ========== ATUALIZAR HISTÓRICO ==========
+        function atualizarHistorico() {
+            const tbody = document.getElementById('historico-tbody');
+            if (historico.length === 0) {
+                tbody.innerHTML = `<tr class="vazio"><td colspan="6"><i class="fas fa-inbox"></i> Nenhum desafio resolvido ainda. Comece agora!</td></tr>`;
+                return;
+            }
+            
+            tbody.innerHTML = historico.map((h, i) => `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td><span class="lang-badge">${h.lang}</span></td>
+                    <td>${h.titulo}</td>
+                    <td><span class="badge-dificuldade ${h.dificuldade === 'Fácil' ? 'verde' : h.dificuldade === 'Médio' ? 'amarelo' : 'vermelho'}">${h.dificuldade}</span></td>
+                    <td class="${h.classe}">${h.resultado}</td>
+                    <td><strong>${h.pontos}</strong></td>
+                </tr>
+            `).join('');
+        }
+
+        // ========== FECHAR MODAL AO CLICAR FORA ==========
+        window.onclick = function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        };
+
+        // ========== SCROLL SUAVE ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const el = document.querySelector(href);
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    document.querySelector('.menu').classList.remove('active');
+                }
+            });
+        });
+
+        // ========== ANIMAÇÃO AO SCROLL ==========
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(sec => {
+            sec.classList.add('scroll-animate');
+            observer.observe(sec);
+        });
+    </script>
+
+</body>
+</html>
